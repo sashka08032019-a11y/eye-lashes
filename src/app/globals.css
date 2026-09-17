@@ -1,0 +1,447 @@
+@import "tailwindcss";
+
+/* Пастельная палитра салона: пудровый розовый + тёплый кремовый. */
+@theme {
+  --color-blush-50: #fdf7f8;
+  --color-blush-100: #fae9ec;
+  --color-blush-200: #f4d3d9;
+  --color-blush-300: #ebb3be;
+  --color-blush-400: #de8b9b;
+  --color-blush-500: #c96c80;
+  --color-blush-600: #a95064;
+  --color-blush-700: #833b4c;
+
+  --color-cream-50: #fdfbf9;
+  --color-cream-100: #f8f3ee;
+  --color-cream-200: #efe5dc;
+
+  --color-ink: #3a2b30;
+  --color-muted: #7b6a70;
+
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blush-500);
+    outline-offset: 2px;
+  }
+}
+
+/*
+ * Star Border — аналог https://reactbits.dev/animations/star-border
+ *
+ * Тонкая полоса по верхней и нижней кромке кнопки, по которой пробегает
+ * блик. Полоса получается из двух широких радиальных градиентов, которые
+ * обрезаются контейнером с overflow: hidden и вертикальным паддингом.
+ */
+
+/*
+ * Фон контейнера обязателен. Полоса, по которой бежит блик, — это паддинг
+ * контейнера вокруг непрозрачной «шляпки». Без своего фона сквозь неё
+ * просвечивает фон страницы, и светлый блик оказывается темнее окружения
+ * — на светлой странице эффект превращается в едва заметное пятно.
+ */
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding: 2px 0; /* переопределяется инлайном через проп thickness */
+  border-radius: 9999px;
+  vertical-align: middle;
+  background: var(--sb-bg, #a95064);
+  transition: background-color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-border-glow {
+  position: absolute;
+  display: block;
+  width: 300%;
+  height: 50%;
+  border-radius: 50%;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Длительность приходит инлайном из пропа speed и перекрывает 0s из шортката. */
+.star-border-glow--bottom {
+  bottom: -12px;
+  right: -250%;
+  animation: star-border-sweep-left linear infinite alternate;
+}
+
+.star-border-glow--top {
+  top: -12px;
+  left: -250%;
+  animation: star-border-sweep-right linear infinite alternate;
+}
+
+.star-border-inner {
+  position: relative;
+  z-index: 1;
+  display: block;
+  border-radius: inherit;
+  border: 1px solid var(--sb-border, rgb(255 255 255 / 0.35));
+  background: var(--sb-bg, #a95064);
+  color: var(--sb-text, #ffffff);
+  text-align: center;
+  transition: background-color 0.25s ease;
+}
+
+.star-border-container:hover,
+.star-border-container:focus-visible {
+  background: var(--sb-bg-hover, var(--sb-bg, #a95064));
+}
+
+.star-border-container:hover .star-border-inner,
+.star-border-container:focus-visible .star-border-inner {
+  background: var(--sb-bg-hover, var(--sb-bg, #a95064));
+}
+
+.star-border-container:focus-visible {
+  outline: 2px solid var(--color-blush-500);
+  outline-offset: 3px;
+}
+
+.star-border-container:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@keyframes star-border-sweep-left {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-border-sweep-right {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-border-glow {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/*
+ * Magic Bento — аналог https://reactbits.dev/components/magic-bento
+ *
+ * Часть эффектов не выражается утилитами Tailwind: рамка со свечением
+ * строится через mask-composite, а размер и положение свечения приходят
+ * из CSS-переменных, которые обновляет компонент при движении курсора.
+ *
+ * Палитра адаптирована под салон: глубокий сливовый вместо чёрного и
+ * пудрово-розовое свечение вместо фиолетового.
+ */
+
+/* --- сетка --- */
+
+.magic-bento-section {
+  position: relative;
+  /* Свечение задаётся каналами без запятых — так работает rgb(var(--x) / .5). */
+  --bento-glow: 201 108 128;
+}
+
+.magic-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.magic-bento-cell {
+  display: flex;
+}
+
+@media (min-width: 640px) {
+  .magic-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .magic-bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /*
+   * Первая карточка — крупная ячейка 2×2, остальные 1×1.
+   * Такая раскладка закрывает строку целиком и без дырок для любого
+   * количества карточек, кратного трём: и для 6 услуг, и для 9.
+   */
+  .magic-bento-cell:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+/* --- карточка --- */
+
+.magic-bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex: 1;
+  min-height: 186px;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgb(235 179 190 / 0.16);
+  border-radius: 1.25rem;
+  background: linear-gradient(150deg, #36252f 0%, #241a20 100%);
+  color: #fdf7f8;
+  transform: perspective(1000px) rotateX(calc(var(--tilt-y, 0) * 1deg))
+    rotateY(calc(var(--tilt-x, 0) * 1deg))
+    translate3d(calc(var(--mag-x, 0) * 1px), calc(var(--mag-y, 0) * 1px), 0);
+  transition: transform 0.25s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 260px;
+}
+
+.magic-bento-card:hover {
+  border-color: rgb(235 179 190 / 0.3);
+  box-shadow: 0 10px 40px rgb(46 24 32 / 0.35), 0 0 30px rgb(var(--bento-glow) / 0.18);
+}
+
+/* Рамка со свечением: градиент маскируется так, что остаётся только кант. */
+.magic-bento-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 5px;
+  border-radius: inherit;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgb(var(--bento-glow) / calc(var(--glow-intensity) * 0.85)) 0%,
+    rgb(var(--bento-glow) / calc(var(--glow-intensity) * 0.45)) 32%,
+    transparent 62%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- содержимое карточки --- */
+
+.magic-bento-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.magic-bento-card__label {
+  /* Не меньше 12px: на телефоне капслок мелким шрифтом не читается. */
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ebb3be;
+}
+
+.magic-bento-card__meta {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fdf7f8;
+}
+
+.magic-bento-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.magic-bento-card__description {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgb(250 233 236 / 0.72);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* На мобильном карточка одна в строке и места хватает — даём лишнюю строку,
+     чтобы описание не обрезалось на середине. */
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .magic-bento-card__description {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
+/* Горизонтальная прокрутка навигации на мобильном: полоса нам не нужна. */
+.mobile-nav-scroll {
+  scrollbar-width: none;
+}
+
+.mobile-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.magic-bento-card__foot {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  color: rgb(250 233 236 / 0.5);
+}
+
+/* --- глобальный спотлайт --- */
+
+.magic-bento-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 30;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: translate3d(
+    calc(var(--spot-x, 0) * 1px - 50%),
+    calc(var(--spot-y, 0) * 1px - 50%),
+    0
+  );
+  background: radial-gradient(
+    circle,
+    rgb(var(--bento-glow) / 0.16) 0%,
+    rgb(var(--bento-glow) / 0.08) 15%,
+    rgb(var(--bento-glow) / 0.04) 25%,
+    rgb(var(--bento-glow) / 0.02) 40%,
+    rgb(var(--bento-glow) / 0.01) 65%,
+    transparent 70%
+  );
+}
+
+/* --- частицы и волна от клика --- */
+
+.magic-bento-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgb(var(--bento-glow));
+  box-shadow: 0 0 6px rgb(var(--bento-glow) / 0.7);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: bento-particle 4s ease-in-out infinite;
+  /* Отрицательная задержка рассыпает частицы по фазе — не мигают синхронно. */
+  animation-delay: calc(var(--i) * -0.37s);
+}
+
+@keyframes bento-particle {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.4);
+  }
+  20% {
+    opacity: 0.85;
+    transform: translate3d(calc(var(--dx) * 0.25px), calc(var(--dy) * 0.25px), 0) scale(1);
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(var(--dx) * 1px), calc(var(--dy) * 1px), 0) scale(0.6);
+  }
+}
+
+.magic-bento-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    rgb(var(--bento-glow) / 0.45) 0%,
+    rgb(var(--bento-glow) / 0.2) 30%,
+    transparent 70%
+  );
+  animation: bento-ripple 0.8s ease-out forwards;
+}
+
+@keyframes bento-ripple {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Ссылка растянута на всю карточку, но остаётся обычным <a> с текстом —
+   это важно и для скринридеров, и для поисковых роботов. */
+.magic-bento-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* --- доступность --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .magic-bento-card {
+    transform: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .magic-bento-particle,
+  .magic-bento-ripple,
+  .magic-bento-spotlight {
+    display: none;
+  }
+}
