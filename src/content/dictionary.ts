@@ -20,6 +20,9 @@ const ru = {
     blog: "Блог",
     map: "Мы на карте",
     contacts: "Контакты",
+    menu: "Меню",
+    openMenu: "Открыть меню",
+    closeMenu: "Закрыть меню",
   },
   common: {
     whatsapp: "Написать в WhatsApp",
@@ -206,6 +209,9 @@ const kk: Dictionary = {
     blog: "Блог",
     map: "Картада",
     contacts: "Байланыс",
+    menu: "Мәзір",
+    openMenu: "Мәзірді ашу",
+    closeMenu: "Мәзірді жабу",
   },
   common: {
     whatsapp: "WhatsApp-қа жазу",
