@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import CurrentYear from "@/components/CurrentYear";
+import LogoCircularCta from "@/components/Web Development Studio/LogoCircularCta";
 import type { Dictionary } from "@/content/dictionary";
 import { localizedPath, type Locale } from "@/lib/i18n";
 import { mapLinks, messengerLinks, site } from "@/lib/site";
@@ -134,12 +136,33 @@ export default function Footer({ locale, dict }: Props) {
         </div>
       </div>
 
-      <div className="border-t border-blush-100 px-4 py-4">
-        <div className="mx-auto max-w-6xl space-y-1 text-xs text-muted">
-          <p>
-            © {new Date().getFullYear()} {site.name}. {dict.footer.rights}
-          </p>
-          <p>{dict.footer.disclaimer}</p>
+      {/*
+        Нижняя полоса: копирайт слева, круглая CTA веб-студии справа.
+        На телефоне блоки встают в колонку и центрируются — круглая ссылка
+        остаётся крупной мишенью для пальца (размер задаётся в px, не в %).
+      */}
+      <div className="border-t border-blush-100 px-4 py-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1 text-center text-xs text-muted sm:text-left">
+            <p>
+              © <CurrentYear /> {site.name}. {dict.footer.rights}
+            </p>
+            <p>{dict.footer.disclaimer}</p>
+          </div>
+
+          {/*
+            size — диаметр в px, fontSize — размер текста в единицах viewBox
+            (200×200): на экране текст получается fontSize * size / 200, то есть
+            при size=160 и fontSize=17 — около 13.6px. Меньше 15 единиц брать
+            нельзя: дуги перестают читаться.
+          */}
+          <LogoCircularCta
+            topText={dict.footer.ctaTop}
+            bottomText={dict.footer.ctaBottom}
+            size={160}
+            fontSize={17}
+            className="shrink-0"
+          />
         </div>
       </div>
     </footer>
