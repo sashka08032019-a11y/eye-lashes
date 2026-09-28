@@ -4,7 +4,7 @@ import CurrentYear from "@/components/CurrentYear";
 import LogoCircularCta from "@/components/Web Development Studio/LogoCircularCta";
 import type { Dictionary } from "@/content/dictionary";
 import { localizedPath, type Locale } from "@/lib/i18n";
-import { mapLinks, messengerLinks, site } from "@/lib/site";
+import { addressLine, mapLinks, messengerLinks, site } from "@/lib/site";
 import { navOrder, routes, type RouteKey } from "@/lib/routes";
 
 type Props = {
@@ -16,6 +16,10 @@ type Props = {
  * Футер дублирует NAP-данные (название, адрес, телефон) и внутренние ссылки.
  * Совпадение этих данных с карточками в Яндекс.Бизнесе и 2ГИС — базовое
  * требование локального SEO, поэтому значения берутся только из lib/site.ts.
+ *
+ * Футер — тёмная секция (forest, #162925): светлый текст на тёмном фоне
+ * держит контраст выше WCAG AA. Вторичный акцент (clay, #d39c87) используется
+ * только для наведения и декора.
  */
 export default function Footer({ locale, dict }: Props) {
   const links = messengerLinks(locale);
@@ -31,15 +35,15 @@ export default function Footer({ locale, dict }: Props) {
   };
 
   return (
-    <footer className="mt-16 border-t border-blush-100 bg-cream-100">
+    <footer className="mt-16 border-t border-brand-700 bg-forest text-sand-100">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
         <div>
-          <p className="text-base font-semibold text-blush-700">{site.name}</p>
-          <p className="mt-2 text-sm text-muted">{dict.footer.about}</p>
+          <p className="text-base font-semibold text-sand-100">{site.name}</p>
+          <p className="mt-2 text-sm text-sand-100/75">{dict.footer.about}</p>
         </div>
 
         <nav aria-label={dict.footer.navigation}>
-          <p className="text-sm font-semibold text-ink">{dict.footer.navigation}</p>
+          <p className="text-sm font-semibold text-sand-100">{dict.footer.navigation}</p>
           {/*
             Ссылки занимают строку целиком (w-full): на телефоне палец должен
             попадать в пункт, а не в текст шириной в слово. py-1.5 поднимает
@@ -51,7 +55,7 @@ export default function Footer({ locale, dict }: Props) {
               <li key={key}>
                 <Link
                   href={localizedPath(locale, routes[key])}
-                  className="inline-block w-full py-1.5 text-muted transition-colors hover:text-blush-700"
+                  className="inline-block w-full py-1.5 text-sand-100/75 transition-colors hover:text-clay-400"
                 >
                   {labels[key]}
                 </Link>
@@ -61,17 +65,16 @@ export default function Footer({ locale, dict }: Props) {
         </nav>
 
         <div>
-          <p className="text-sm font-semibold text-ink">{dict.footer.contacts}</p>
-          <address className="mt-3 space-y-1.5 text-sm not-italic text-muted">
+          <p className="text-sm font-semibold text-sand-100">{dict.footer.contacts}</p>
+          <address className="mt-3 space-y-1.5 text-sm not-italic text-sand-100/75">
             <p>
-              {dict.pages.contacts.addressLabel}: {site.address.street}, {site.address.city},{" "}
-              {site.address.region}
+              {dict.pages.contacts.addressLabel}: {addressLine(locale)}
             </p>
             <p>
               {dict.pages.contacts.phoneLabel}:{" "}
               <a
                 href={links.phone}
-                className="inline-block py-1 transition-colors hover:text-blush-700"
+                className="inline-block py-1 transition-colors hover:text-clay-400"
               >
                 {site.phone.display}
               </a>
@@ -87,7 +90,7 @@ export default function Footer({ locale, dict }: Props) {
                 href={links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-1.5 text-muted transition-colors hover:text-blush-700"
+                className="inline-block py-1.5 text-sand-100/75 transition-colors hover:text-clay-400"
               >
                 WhatsApp
               </a>
@@ -97,7 +100,7 @@ export default function Footer({ locale, dict }: Props) {
                 href={links.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-1.5 text-muted transition-colors hover:text-blush-700"
+                className="inline-block py-1.5 text-sand-100/75 transition-colors hover:text-clay-400"
               >
                 Telegram
               </a>
@@ -107,19 +110,9 @@ export default function Footer({ locale, dict }: Props) {
                 href={links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-1.5 text-muted transition-colors hover:text-blush-700"
+                className="inline-block py-1.5 text-sand-100/75 transition-colors hover:text-clay-400"
               >
                 Instagram
-              </a>
-            </li>
-            <li>
-              <a
-                href={mapLinks.yandex}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block py-1.5 text-muted transition-colors hover:text-blush-700"
-              >
-                {dict.common.openYandex}
               </a>
             </li>
             <li>
@@ -127,7 +120,7 @@ export default function Footer({ locale, dict }: Props) {
                 href={mapLinks.twogis}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-1.5 text-muted transition-colors hover:text-blush-700"
+                className="inline-block py-1.5 text-sand-100/75 transition-colors hover:text-clay-400"
               >
                 {dict.common.open2gis}
               </a>
@@ -141,9 +134,9 @@ export default function Footer({ locale, dict }: Props) {
         На телефоне блоки встают в колонку и центрируются — круглая ссылка
         остаётся крупной мишенью для пальца (размер задаётся в px, не в %).
       */}
-      <div className="border-t border-blush-100 px-4 py-6">
+      <div className="border-t border-brand-700 px-4 py-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1 text-center text-xs text-muted sm:text-left">
+          <div className="space-y-1 text-center text-xs text-sand-100/60 sm:text-left">
             <p>
               © <CurrentYear /> {site.name}. {dict.footer.rights}
             </p>

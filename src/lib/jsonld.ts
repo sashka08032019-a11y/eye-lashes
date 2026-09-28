@@ -9,11 +9,6 @@ type Json = Record<string, unknown>;
  * Данные берутся из src/lib/site.ts, чтобы NAP совпадал с сайтом.
  */
 export function beautySalonJsonLd(locale: Locale): Json {
-  const cityLaced: Record<Locale, string> = {
-    ru: `${site.address.city}, ${site.address.region}`,
-    kk: `${site.address.city}, ${site.address.region}`,
-  };
-
   return {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
@@ -28,9 +23,9 @@ export function beautySalonJsonLd(locale: Locale): Json {
     currenciesAccepted: "KZT",
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.street,
-      addressLocality: site.address.city,
-      addressRegion: site.address.region,
+      streetAddress: site.address.street[locale],
+      addressLocality: site.address.city[locale],
+      addressRegion: site.address.region[locale],
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
@@ -40,8 +35,8 @@ export function beautySalonJsonLd(locale: Locale): Json {
       longitude: site.geo.longitude,
     },
     areaServed: [
-      { "@type": "City", name: site.address.city },
-      { "@type": "AdministrativeArea", name: site.address.region },
+      { "@type": "City", name: site.address.city[locale] },
+      { "@type": "AdministrativeArea", name: site.address.region[locale] },
     ],
     openingHoursSpecification: site.openingHours.spec.map((entry) => ({
       "@type": "OpeningHoursSpecification",
@@ -87,7 +82,7 @@ export function serviceJsonLd(
     serviceType: service.name,
     url: absoluteUrl(localizedPath(locale, `/uslugi/${service.slug}`)),
     provider: { "@id": `${absoluteUrl("/")}#organization` },
-    areaServed: { "@type": "City", name: site.address.city },
+    areaServed: { "@type": "City", name: site.address.city[locale] },
     offers: {
       "@type": "Offer",
       price: service.price,

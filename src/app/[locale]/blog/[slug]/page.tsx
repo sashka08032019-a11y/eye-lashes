@@ -62,7 +62,7 @@ export default async function PostPage({ params }: PageProps) {
       />
 
       <Section as="h1" title={post.title[locale]}>
-        <p className="text-xs uppercase tracking-wider text-blush-400">
+        <p className="text-xs uppercase tracking-wider text-brand-600">
           <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString(locale === "ru" ? "ru-RU" : "kk-KZ")}
           </time>
@@ -75,14 +75,14 @@ export default async function PostPage({ params }: PageProps) {
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-blush-100 bg-cream-100 p-6">
+        <div className="mt-10 rounded-2xl border border-brand-100 bg-sand-100 p-6">
           <h2 className="text-lg font-semibold text-ink">{dict.nav.services}</h2>
           <ul className="mt-3 space-y-2 text-sm">
             {related.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={localizedPath(locale, servicePath(service.slug))}
-                  className="inline-block py-1.5 text-blush-600 transition-colors hover:text-blush-700"
+                  className="inline-block py-1.5 text-brand-600 transition-colors hover:text-brand-700"
                 >
                   {service.name[locale]} — {dict.common.priceFrom}{" "}
                   {service.price.toLocaleString("ru-RU")} {dict.common.currency}
@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         <p className="mt-8 text-xs text-muted">
-          {site.name} · {site.address.city}, {site.address.region}
+          {site.name} · {site.address.city[locale]}, {site.address.region[locale]}
         </p>
       </Section>
 

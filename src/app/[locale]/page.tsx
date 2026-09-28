@@ -61,11 +61,11 @@ export default async function HomePage({ params }: PageProps) {
         текст остаётся обычной серверной разметкой: h1, абзацы и CTA есть в HTML
         сразу, без ожидания JS — это важно для индексации.
       */}
-      <section className="relative isolate overflow-hidden border-b border-blush-100">
+      <section className="relative isolate overflow-hidden border-b border-brand-100">
         {/* Статичная подложка: видна до гидратации и при отключённом JS. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-20 bg-linear-to-br from-blush-100 via-cream-100 to-blush-200"
+          className="absolute inset-0 -z-20 bg-linear-to-br from-brand-100 via-sand-100 to-brand-200"
         />
 
         <div aria-hidden="true" className="absolute inset-0 -z-10">
@@ -73,14 +73,14 @@ export default async function HomePage({ params }: PageProps) {
             count={56}
             minRadius={0.03}
             maxRadius={0.08}
-            colors={["#ebb3be", "#de8b9b", "#f4d3d9", "#fae9ec", "#c96c80", "#efe5dc", "#ffffff"]}
+            colors={["#386352", "#47755f", "#93bda9", "#d39c87", "#e6c0ac", "#f7ddd0", "#fcf3ee"]}
           />
         </div>
 
         {/* Затемняющая вуаль: держит контраст текста поверх шариков. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-linear-to-r from-cream-50/95 via-cream-50/70 to-cream-50/20"
+          className="absolute inset-0 -z-10 bg-linear-to-r from-sand-50/95 via-sand-50/70 to-sand-50/20"
         />
 
         <div className="mx-auto flex min-h-[min(78vh,640px)] max-w-6xl flex-col justify-center px-4 py-14 sm:py-20">
@@ -95,13 +95,13 @@ export default async function HomePage({ params }: PageProps) {
             className="mb-6 w-[min(400px,72%)] select-none"
           />
 
-          <p className="text-sm uppercase tracking-[0.2em] text-blush-500">
-            {site.address.city} · {site.address.region}
+          <p className="text-sm uppercase tracking-[0.2em] text-brand-600">
+            {site.address.city[locale]} · {site.address.region[locale]}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
             {page.heroTitle}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-blush-700">{page.heroSubtitle}</p>
+          <p className="mt-4 max-w-2xl text-lg text-brand-700">{page.heroSubtitle}</p>
           <p className="mt-4 max-w-3xl text-ink/80">{page.heroText}</p>
 
           <div className="mt-7">
@@ -122,7 +122,7 @@ export default async function HomePage({ params }: PageProps) {
 
         <Link
           href={localizedPath(locale, routes.services)}
-          className="mt-6 inline-block py-2 text-sm font-medium text-blush-600 transition-colors hover:text-blush-700"
+          className="mt-6 inline-block py-2 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
         >
           {dict.common.allServices} →
         </Link>
@@ -133,7 +133,7 @@ export default async function HomePage({ params }: PageProps) {
           {page.advantages.map((item) => (
             <li
               key={item}
-              className="rounded-2xl border border-blush-100 bg-cream-100 p-5 text-sm text-ink"
+              className="rounded-2xl border border-brand-100 bg-sand-100 p-5 text-sm text-ink"
             >
               {item}
             </li>
@@ -151,11 +151,11 @@ export default async function HomePage({ params }: PageProps) {
       <Section title={page.blogTitle} lead={page.blogText}>
         <ul className="grid gap-5 sm:grid-cols-3">
           {latestPosts.map((post) => (
-            <li key={post.slug} className="rounded-2xl border border-blush-100 bg-white p-5">
+            <li key={post.slug} className="rounded-2xl border border-brand-100 bg-white p-5">
               <h3 className="text-base font-semibold text-ink">
                 <Link
                   href={localizedPath(locale, postPath(post.slug))}
-                  className="inline-block py-1 transition-colors hover:text-blush-700"
+                  className="inline-block py-1 transition-colors hover:text-brand-700"
                 >
                   {post.title[locale]}
                 </Link>
@@ -167,7 +167,7 @@ export default async function HomePage({ params }: PageProps) {
 
         <Link
           href={localizedPath(locale, routes.blog)}
-          className="mt-6 inline-block py-2 text-sm font-medium text-blush-600 transition-colors hover:text-blush-700"
+          className="mt-6 inline-block py-2 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
         >
           {dict.nav.blog} →
         </Link>
@@ -176,24 +176,16 @@ export default async function HomePage({ params }: PageProps) {
       <Section title={page.mapTitle} lead={page.mapText}>
         <div className="flex flex-wrap gap-3">
           <a
-            href={mapLinks.yandex}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-blush-300 px-5 py-2.5 text-sm font-medium text-blush-700 transition-colors hover:bg-blush-50"
-          >
-            {dict.common.openYandex}
-          </a>
-          <a
             href={mapLinks.twogis}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-blush-300 px-5 py-2.5 text-sm font-medium text-blush-700 transition-colors hover:bg-blush-50"
+            className="rounded-full border border-clay-400 px-5 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-clay-400/20"
           >
             {dict.common.open2gis}
           </a>
           <Link
             href={localizedPath(locale, routes.map)}
-            className="rounded-full border border-blush-300 px-5 py-2.5 text-sm font-medium text-blush-700 transition-colors hover:bg-blush-50"
+            className="rounded-full border border-clay-400 px-5 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-clay-400/20"
           >
             {dict.nav.map}
           </Link>
@@ -201,7 +193,7 @@ export default async function HomePage({ params }: PageProps) {
       </Section>
 
       <Section className="pb-16">
-        <div className="rounded-3xl bg-blush-100 p-8 sm:p-10">
+        <div className="rounded-3xl bg-brand-100 p-8 sm:p-10">
           <h2 className="text-2xl font-semibold text-ink">{page.ctaTitle}</h2>
           <p className="mt-2 max-w-2xl text-muted">{page.ctaText}</p>
           <div className="mt-6">

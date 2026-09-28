@@ -27,7 +27,7 @@ export function generateStaticParams() {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fdf7f8",
+  themeColor: "#f7ddd0",
 };
 
 export const metadata: Metadata = {
@@ -41,13 +41,25 @@ export const metadata: Metadata = {
   creator: site.name,
   formatDetection: { telephone: true, address: true, email: true },
   icons: {
-    icon: [{ url: "/favicon.ico" }],
-    apple: [{ url: "/Logo.png" }],
+    // favicon.ico оставлен для старых браузеров, PNG — с явными размерами.
+    icon: [
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
     siteName: site.name,
-    images: [{ url: "/Logo.png", width: 1200, height: 630, alt: `Логотип ${site.name}` }],
+    images: [
+      {
+        url: "/og-cover.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: `${site.name} — наращивание ресниц в Есике`,
+      },
+    ],
   },
   // Коды подтверждения подставляются автоматически, когда их заполнят в lib/site.ts.
   ...(site.verification.yandex || site.verification.google
@@ -86,7 +98,7 @@ export default async function LocaleLayout({
         */}
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-blush-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
         >
           {dict.common.skipToContent}
         </a>

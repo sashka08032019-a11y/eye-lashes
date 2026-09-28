@@ -14,7 +14,7 @@ type Props = {
 };
 
 const OUTLINE =
-  "inline-block rounded-full border border-blush-300 px-5 py-2.5 text-sm font-medium text-blush-700 transition-colors hover:bg-blush-50";
+  "inline-block rounded-full border border-clay-400 px-5 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-clay-400/20";
 
 /**
  * Кнопки связи вместо формы онлайн-записи. Ссылки ведут в мессенджеры
@@ -55,8 +55,8 @@ export default function CtaButtons({ locale, dict, primary = "whatsapp" }: Props
             color="#ffffff"
             speed="5s"
             thickness={2}
-            backgroundColor="#a95064"
-            hoverBackgroundColor="#833b4c"
+            backgroundColor="#386352"
+            hoverBackgroundColor="#2b4c3f"
             textColor="#ffffff"
             borderColor="rgb(255 255 255 / 0.4)"
             innerClassName={starBorderPill}

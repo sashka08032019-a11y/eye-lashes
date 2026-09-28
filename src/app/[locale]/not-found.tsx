@@ -21,13 +21,13 @@ export default function LocaleNotFound() {
       <div className="mt-6 flex flex-wrap gap-3 text-sm">
         <Link
           href={localizedPath(defaultLocale, routes.home)}
-          className="rounded-full bg-blush-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blush-700"
+          className="rounded-full bg-brand-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-brand-700"
         >
           {dict.common.backHome}
         </Link>
         <Link
           href={localizedPath(defaultLocale, routes.services)}
-          className="rounded-full border border-blush-300 px-5 py-2.5 font-medium text-blush-700 transition-colors hover:bg-blush-50"
+          className="rounded-full border border-clay-400 px-5 py-2.5 font-medium text-brand-700 transition-colors hover:bg-clay-400/20"
         >
           {dict.nav.services}
         </Link>

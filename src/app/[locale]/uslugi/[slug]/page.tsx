@@ -82,13 +82,13 @@ export default async function ServicePage({ params }: PageProps) {
         <p className="max-w-3xl text-muted">{service.description[locale]}</p>
 
         <dl className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-blush-100 bg-white p-5">
+          <div className="rounded-2xl border border-brand-100 bg-white p-5">
             <dt className="text-sm text-muted">{dict.common.price}</dt>
-            <dd className="mt-1 text-xl font-semibold text-blush-700">
+            <dd className="mt-1 text-xl font-semibold text-brand-700">
               {dict.common.priceFrom} {service.price.toLocaleString("ru-RU")} {dict.common.currency}
             </dd>
           </div>
-          <div className="rounded-2xl border border-blush-100 bg-white p-5">
+          <div className="rounded-2xl border border-brand-100 bg-white p-5">
             <dt className="text-sm text-muted">{dict.common.duration}</dt>
             <dd className="mt-1 text-xl font-semibold text-ink">{service.duration[locale]}</dd>
           </div>

@@ -344,7 +344,7 @@ export default function MetallicLogo({
   chromaticSpread = 2,
   distortion = 1,
   contour = 0.2,
-  tintColor = "#feb3ff",
+  tintColor = "#d39c87",
   maxSize = 768,
 }: MetallicLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

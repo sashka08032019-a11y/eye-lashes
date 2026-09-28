@@ -25,7 +25,7 @@ export default function Breadcrumbs({ locale, items }: Props) {
                 {item.path && !isLast ? (
                   <Link
                     href={localizedPath(locale, item.path)}
-                    className="inline-block py-1.5 transition-colors hover:text-blush-700"
+                    className="inline-block py-1.5 transition-colors hover:text-brand-700"
                   >
                     {item.name}
                   </Link>

@@ -48,10 +48,10 @@ export default async function BlogPage({ params }: PageProps) {
         <ul className="grid gap-5 sm:grid-cols-2">
           {sorted.map((post) => (
             <li key={post.slug}>
-              <article className="flex h-full flex-col rounded-2xl border border-blush-100 bg-white p-6 shadow-sm">
+              <article className="flex h-full flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-sm">
                 <time
                   dateTime={post.date}
-                  className="text-xs uppercase tracking-wider text-blush-400"
+                  className="text-xs uppercase tracking-wider text-brand-600"
                 >
                   {new Date(post.date).toLocaleDateString(locale === "ru" ? "ru-RU" : "kk-KZ")}
                   {post.draft ? ` · ${dict.common.draft}` : ""}
@@ -60,7 +60,7 @@ export default async function BlogPage({ params }: PageProps) {
                 <h2 className="mt-2 text-lg font-semibold text-ink">
                   <Link
                     href={localizedPath(locale, postPath(post.slug))}
-                    className="transition-colors hover:text-blush-700"
+                    className="transition-colors hover:text-brand-700"
                   >
                     {post.title[locale]}
                   </Link>
@@ -70,7 +70,7 @@ export default async function BlogPage({ params }: PageProps) {
 
                 <Link
                   href={localizedPath(locale, postPath(post.slug))}
-                  className="mt-4 inline-block py-1.5 text-sm font-medium text-blush-600 transition-colors hover:text-blush-700"
+                  className="mt-4 inline-block py-1.5 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
                 >
                   {dict.common.readMore} →
                 </Link>

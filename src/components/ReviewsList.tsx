@@ -32,14 +32,14 @@ export default function ReviewsList({ locale, dict, reviews }: Props) {
         {reviews.map((review) => (
           <li
             key={review.id}
-            className="rounded-2xl border border-blush-100 bg-white p-5 shadow-sm"
+            className="rounded-2xl border border-brand-100 bg-white p-5 shadow-sm"
           >
             <div className="flex items-center justify-between gap-3">
               <p className="font-medium text-ink">{review.name}</p>
               <Rating value={review.rating} />
             </div>
             <p className="mt-3 text-sm text-muted">{review.text[locale]}</p>
-            <time dateTime={review.createdAt} className="mt-3 block text-xs text-blush-300">
+            <time dateTime={review.createdAt} className="mt-3 block text-xs text-muted">
               {new Date(review.createdAt).toLocaleDateString(locale === "ru" ? "ru-RU" : "kk-KZ")}
             </time>
           </li>

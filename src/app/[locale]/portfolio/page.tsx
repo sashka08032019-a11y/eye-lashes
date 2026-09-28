@@ -50,15 +50,15 @@ export default async function PortfolioPage({ params }: PageProps) {
           {featured.map((service) => (
             <li
               key={service.slug}
-              className="flex aspect-4/5 flex-col justify-end rounded-2xl border border-dashed border-blush-200 bg-cream-100 p-5"
+              className="flex aspect-4/5 flex-col justify-end rounded-2xl border border-dashed border-brand-200 bg-sand-100 p-5"
             >
-              <p className="text-xs uppercase tracking-wider text-blush-400">
+              <p className="text-xs uppercase tracking-wider text-brand-600">
                 {dict.common.placeholder}
               </p>
               <p className="mt-2 font-medium text-ink">{service.name[locale]}</p>
               <Link
                 href={localizedPath(locale, servicePath(service.slug))}
-                className="mt-2 inline-block py-1.5 text-sm text-blush-600 transition-colors hover:text-blush-700"
+                className="mt-2 inline-block py-1.5 text-sm text-brand-600 transition-colors hover:text-brand-700"
               >
                 {dict.common.details} →
               </Link>

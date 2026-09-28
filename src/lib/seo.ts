@@ -3,12 +3,18 @@ import type { Metadata } from "next";
 import { absoluteUrl, languageAlternates, localizedPath, type Locale } from "./i18n";
 import { site } from "./site";
 
-/** Размер картинки для соцсетей. TODO: подготовить отдельный OG-баннер 1200x630 (сейчас используется логотип). */
+/**
+ * Картинка превью для соцсетей и мессенджеров (в т.ч. WhatsApp):
+ * статичный PNG 1200×630, ~60 КБ — укладывается в лимит WhatsApp (~300 КБ)
+ * и отдаётся как обычный файл из public/, без авторизации и редиректов.
+ * Пересобирается скриптом `node scripts/generate-og.mjs`.
+ */
 const ogImage = {
-  url: "/Logo.png",
+  url: "/og-cover.png",
   width: 1200,
   height: 630,
-  alt: `Логотип ${site.name}`,
+  type: "image/png",
+  alt: `${site.name} — наращивание ресниц в Есике`,
 };
 
 export type SeoInput = {
@@ -76,7 +82,7 @@ export function buildMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage.url],
+      images: [{ url: ogImage.url, alt: ogImage.alt }],
     },
   };
 }

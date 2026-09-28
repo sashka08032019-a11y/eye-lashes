@@ -9,7 +9,7 @@ import { getDictionary } from "@/content/dictionary";
 import { isLocale, localizedPath } from "@/lib/i18n";
 import { routes } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo";
-import { mapLinks, messengerLinks, site } from "@/lib/site";
+import { addressLine, mapLinks, messengerLinks, site } from "@/lib/site";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -48,26 +48,26 @@ export default async function ContactsPage({ params }: PageProps) {
 
       <Section as="h1" title={page.title} lead={page.lead}>
         <dl className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-blush-100 bg-white p-5">
+          <div className="rounded-2xl border border-brand-100 bg-white p-5">
             <dt className="text-sm text-muted">{page.addressLabel}</dt>
             <dd className="mt-1 font-medium text-ink">
-              {site.address.street}, {site.address.city}, {site.address.region}
+              {addressLine(locale)}
             </dd>
           </div>
 
-          <div className="rounded-2xl border border-blush-100 bg-white p-5">
+          <div className="rounded-2xl border border-brand-100 bg-white p-5">
             <dt className="text-sm text-muted">{page.phoneLabel}</dt>
             <dd className="mt-1 font-medium text-ink">
               <a
                 href={links.phone}
-                className="inline-block py-1 transition-colors hover:text-blush-700"
+                className="inline-block py-1 transition-colors hover:text-brand-700"
               >
                 {site.phone.display}
               </a>
             </dd>
           </div>
 
-          <div className="rounded-2xl border border-blush-100 bg-white p-5">
+          <div className="rounded-2xl border border-brand-100 bg-white p-5">
             <dt className="text-sm text-muted">{page.hoursLabel}</dt>
             <dd className="mt-1 font-medium text-ink">{site.openingHours.display[locale]}</dd>
           </div>
@@ -82,7 +82,7 @@ export default async function ContactsPage({ params }: PageProps) {
               href={links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block py-1.5 text-blush-600 transition-colors hover:text-blush-700"
+              className="inline-block py-1.5 text-brand-600 transition-colors hover:text-brand-700"
             >
               WhatsApp — {site.phone.display}
             </a>
@@ -92,7 +92,7 @@ export default async function ContactsPage({ params }: PageProps) {
               href={links.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block py-1.5 text-blush-600 transition-colors hover:text-blush-700"
+              className="inline-block py-1.5 text-brand-600 transition-colors hover:text-brand-700"
             >
               Telegram — @{site.telegram}
             </a>
@@ -102,7 +102,7 @@ export default async function ContactsPage({ params }: PageProps) {
               href={links.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block py-1.5 text-blush-600 transition-colors hover:text-blush-700"
+              className="inline-block py-1.5 text-brand-600 transition-colors hover:text-brand-700"
             >
               Instagram — @{site.instagram}
             </a>
@@ -110,7 +110,7 @@ export default async function ContactsPage({ params }: PageProps) {
           <li>
             <a
               href={links.email}
-              className="inline-block py-1.5 text-blush-600 transition-colors hover:text-blush-700"
+              className="inline-block py-1.5 text-brand-600 transition-colors hover:text-brand-700"
             >
               {site.email}
             </a>
@@ -124,23 +124,15 @@ export default async function ContactsPage({ params }: PageProps) {
         <div className="mt-6 flex flex-wrap gap-3 text-sm">
           <Link
             href={localizedPath(locale, routes.map)}
-            className="rounded-full border border-blush-300 px-5 py-2.5 font-medium text-blush-700 transition-colors hover:bg-blush-50"
+            className="rounded-full border border-clay-400 px-5 py-2.5 font-medium text-brand-700 transition-colors hover:bg-clay-400/20"
           >
             {dict.nav.map}
           </Link>
           <a
-            href={mapLinks.yandex}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-blush-300 px-5 py-2.5 font-medium text-blush-700 transition-colors hover:bg-blush-50"
-          >
-            {dict.common.openYandex}
-          </a>
-          <a
             href={mapLinks.twogis}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-blush-300 px-5 py-2.5 font-medium text-blush-700 transition-colors hover:bg-blush-50"
+            className="rounded-full border border-clay-400 px-5 py-2.5 font-medium text-brand-700 transition-colors hover:bg-clay-400/20"
           >
             {dict.common.open2gis}
           </a>

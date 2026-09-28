@@ -61,7 +61,7 @@ export default function StarBorder({
   color = "#ffffff",
   speed = "6s",
   thickness = 2,
-  backgroundColor = "#a95064",
+  backgroundColor = "#386352",
   hoverBackgroundColor,
   textColor = "#ffffff",
   borderColor = "rgb(255 255 255 / 0.35)",

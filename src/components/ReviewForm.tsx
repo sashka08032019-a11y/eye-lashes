@@ -59,10 +59,10 @@ export default function ReviewForm({ locale, dict }: Props) {
   }
 
   const field =
-    "mt-1 w-full rounded-xl border border-blush-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-blush-300 focus:border-blush-400 focus:outline-none";
+    "mt-1 w-full rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-brand-500 focus:outline-none";
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-blush-100 bg-white p-5">
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-brand-100 bg-white p-5">
       <h3 className="text-lg font-semibold text-ink">{dict.reviews.title}</h3>
       <p className="mt-1 text-sm text-muted">{dict.reviews.lead}</p>
 
@@ -124,8 +124,8 @@ export default function ReviewForm({ locale, dict }: Props) {
           color="#ffffff"
           speed="5s"
           thickness={2}
-          backgroundColor="#a95064"
-          hoverBackgroundColor="#833b4c"
+          backgroundColor="#386352"
+          hoverBackgroundColor="#2b4c3f"
           textColor="#ffffff"
           borderColor="rgb(255 255 255 / 0.4)"
           innerClassName={starBorderPill}
@@ -136,7 +136,7 @@ export default function ReviewForm({ locale, dict }: Props) {
         <p
           role="status"
           aria-live="polite"
-          className={`text-sm ${status === "error" ? "text-blush-700" : "text-muted"}`}
+          className={`text-sm ${status === "error" ? "text-brand-700" : "text-muted"}`}
         >
           {status === "success" ? dict.reviews.success : null}
           {status === "error" ? (error ?? dict.reviews.error) : null}

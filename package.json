@@ -2,12 +2,13 @@
   "name": "eye-lashes",
   "version": "0.1.0",
   "private": true,
-  "description": "Сайт салона наращивания ресниц J.Lash (Есик, Алматинская область)",
+  "description": "Сайт салона наращивания ресниц Julia shik (Есик, Алматинская область)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "og": "node scripts/generate-og.mjs"
   },
   "license": "UNLICENSED",
   "dependencies": {

@@ -132,11 +132,11 @@ export default function Header({ locale, dict }: Props) {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-blush-100 bg-cream-50/90 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-brand-100 bg-sand-50/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-x-4 px-4 py-1.5 sm:gap-x-6 sm:py-3">
           <Link
             href={localizedPath(locale, routes.home)}
-            className="inline-block py-1 text-lg font-semibold tracking-tight text-blush-700"
+            className="inline-block py-1 text-lg font-semibold tracking-tight text-brand-700"
             aria-label={site.name}
           >
             {site.name}
@@ -163,8 +163,8 @@ export default function Header({ locale, dict }: Props) {
                       aria-current={active ? "page" : undefined}
                       className={`inline-block whitespace-nowrap py-2.5 ${
                         active
-                          ? "font-medium text-blush-700 underline decoration-blush-300 decoration-2 underline-offset-4"
-                          : "text-muted transition-colors hover:text-blush-700"
+                          ? "font-medium text-brand-700 underline decoration-clay-400 decoration-2 underline-offset-4"
+                          : "text-muted transition-colors hover:text-brand-700"
                       }`}
                     >
                       {labels[key]}
@@ -185,8 +185,8 @@ export default function Header({ locale, dict }: Props) {
                     aria-current={code === locale ? "true" : undefined}
                     className={
                       code === locale
-                        ? "inline-block rounded-full bg-blush-100 px-3 py-2 font-medium text-blush-700"
-                        : "inline-block rounded-full px-3 py-2 text-muted transition-colors hover:bg-blush-50 hover:text-blush-700"
+                        ? "inline-block rounded-full bg-brand-100 px-3 py-2 font-medium text-brand-700"
+                        : "inline-block rounded-full px-3 py-2 text-muted transition-colors hover:bg-brand-50 hover:text-brand-700"
                     }
                   >
                     {localeLabels[code]}
@@ -199,7 +199,7 @@ export default function Header({ locale, dict }: Props) {
               href={links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden rounded-full bg-blush-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blush-700 sm:inline-block"
+              className="hidden rounded-full bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700 sm:inline-block"
             >
               {dict.common.whatsapp}
             </a>
@@ -211,7 +211,7 @@ export default function Header({ locale, dict }: Props) {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={dict.nav.openMenu}
-              className="-mr-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-blush-700 transition-colors hover:bg-blush-50 sm:hidden"
+              className="-mr-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-brand-700 transition-colors hover:bg-brand-50 sm:hidden"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -248,7 +248,7 @@ export default function Header({ locale, dict }: Props) {
             role="dialog"
             aria-modal="true"
             aria-label={dict.nav.menu}
-            className="mobile-menu-panel absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col overflow-y-auto border-l border-blush-100 bg-cream-50 px-5 pb-8 pt-4 shadow-2xl"
+            className="mobile-menu-panel absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col overflow-y-auto border-l border-brand-100 bg-sand-50 px-5 pb-8 pt-4 shadow-2xl"
           >
             <div className="flex items-center justify-between">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted">
@@ -260,7 +260,7 @@ export default function Header({ locale, dict }: Props) {
                 type="button"
                 onClick={closeMenu}
                 aria-label={dict.nav.closeMenu}
-                className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-blush-50 hover:text-blush-700"
+                className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-brand-50 hover:text-brand-700"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -290,8 +290,8 @@ export default function Header({ locale, dict }: Props) {
                         aria-current={active ? "page" : undefined}
                         className={`flex min-h-11 items-center rounded-2xl px-3 text-base ${
                           active
-                            ? "bg-blush-100 font-medium text-blush-700"
-                            : "text-ink transition-colors hover:bg-blush-50 hover:text-blush-700"
+                            ? "bg-brand-100 font-medium text-brand-700"
+                            : "text-ink transition-colors hover:bg-brand-50 hover:text-brand-700"
                         }`}
                       >
                         {labels[key]}
@@ -307,13 +307,13 @@ export default function Header({ locale, dict }: Props) {
                 href={links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-12 items-center justify-center rounded-full bg-blush-600 px-5 text-sm font-medium text-white transition-colors hover:bg-blush-700"
+                className="flex min-h-12 items-center justify-center rounded-full bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-700"
               >
                 {dict.common.whatsapp}
               </a>
               <a
                 href={links.phone}
-                className="flex min-h-12 items-center justify-center rounded-full border border-blush-200 px-5 text-sm font-medium text-blush-700 transition-colors hover:bg-blush-50"
+                className="flex min-h-12 items-center justify-center rounded-full border border-brand-200 px-5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-50"
               >
                 {site.phone.display}
               </a>

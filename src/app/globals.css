@@ -1,22 +1,38 @@
 @import "tailwindcss";
 
-/* Пастельная палитра салона: пудровый розовый + тёплый кремовый. */
+/*
+ * Палитра салона: глубокий зелёный + тёплый персиковый.
+ *
+ * brand — основной акцент (#386352) и его оттенки для текста, ссылок и
+ *         состояний наведения; brand-500 и темнее читаются на светлом фоне
+ *         (WCAG AA), brand-300/400 оставлены для декора и рамок.
+ * sand  — светлый тёплый фон и карточки (#f7ddd0 и его оттенки).
+ * clay  — вторичный акцент #d39c87: только заливка, иконки и декор, НЕ текст
+ *         на светлом фоне (контраст ~1.8:1, ниже порога AA).
+ * forest — тёмные секции и футер (#162925).
+ * ink   — основной текст на светлом и самый тёмный фон (#14171e).
+ */
 @theme {
-  --color-blush-50: #fdf7f8;
-  --color-blush-100: #fae9ec;
-  --color-blush-200: #f4d3d9;
-  --color-blush-300: #ebb3be;
-  --color-blush-400: #de8b9b;
-  --color-blush-500: #c96c80;
-  --color-blush-600: #a95064;
-  --color-blush-700: #833b4c;
+  --color-brand-50: #eef4f1;
+  --color-brand-100: #d9e8e1;
+  --color-brand-200: #bcd6ca;
+  --color-brand-300: #93bda9;
+  --color-brand-400: #5f9d84;
+  --color-brand-500: #47755f;
+  --color-brand-600: #386352;
+  --color-brand-700: #2b4c3f;
 
-  --color-cream-50: #fdfbf9;
-  --color-cream-100: #f8f3ee;
-  --color-cream-200: #efe5dc;
+  --color-sand-50: #fcf3ee;
+  --color-sand-100: #f7ddd0;
+  --color-sand-200: #ebc9b7;
 
-  --color-ink: #3a2b30;
-  --color-muted: #7b6a70;
+  --color-clay-300: #e6c0ac;
+  --color-clay-400: #d39c87;
+  --color-clay-500: #bf8168;
+
+  --color-forest: #162925;
+  --color-ink: #14171e;
+  --color-muted: #55635d;
 
   --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -28,7 +44,7 @@
   }
 
   body {
-    background-color: var(--color-cream-50);
+    background-color: var(--color-sand-50);
     color: var(--color-ink);
     font-family: var(--font-sans);
     line-height: 1.6;
@@ -42,7 +58,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-blush-500);
+    outline: 2px solid var(--color-brand-600);
     outline-offset: 2px;
   }
 }
@@ -68,7 +84,7 @@
   padding: 2px 0; /* переопределяется инлайном через проп thickness */
   border-radius: 9999px;
   vertical-align: middle;
-  background: var(--sb-bg, #a95064);
+  background: var(--sb-bg, #386352);
   transition: background-color 0.25s ease;
   -webkit-tap-highlight-color: transparent;
 }
@@ -103,7 +119,7 @@
   display: block;
   border-radius: inherit;
   border: 1px solid var(--sb-border, rgb(255 255 255 / 0.35));
-  background: var(--sb-bg, #a95064);
+  background: var(--sb-bg, #386352);
   color: var(--sb-text, #ffffff);
   text-align: center;
   transition: background-color 0.25s ease;
@@ -111,16 +127,16 @@
 
 .star-border-container:hover,
 .star-border-container:focus-visible {
-  background: var(--sb-bg-hover, var(--sb-bg, #a95064));
+  background: var(--sb-bg-hover, var(--sb-bg, #386352));
 }
 
 .star-border-container:hover .star-border-inner,
 .star-border-container:focus-visible .star-border-inner {
-  background: var(--sb-bg-hover, var(--sb-bg, #a95064));
+  background: var(--sb-bg-hover, var(--sb-bg, #386352));
 }
 
 .star-border-container:focus-visible {
-  outline: 2px solid var(--color-blush-500);
+  outline: 2px solid var(--color-brand-600);
   outline-offset: 3px;
 }
 
@@ -165,16 +181,17 @@
  * строится через mask-composite, а размер и положение свечения приходят
  * из CSS-переменных, которые обновляет компонент при движении курсора.
  *
- * Палитра адаптирована под салон: глубокий сливовый вместо чёрного и
- * пудрово-розовое свечение вместо фиолетового.
+ * Палитра адаптирована под салон: тёмно-зелёные карточки (forest)
+ * и тёплое свечение вторичного акцента (clay) вместо фиолетового.
  */
 
 /* --- сетка --- */
 
 .magic-bento-section {
   position: relative;
-  /* Свечение задаётся каналами без запятых — так работает rgb(var(--x) / .5). */
-  --bento-glow: 201 108 128;
+  /* Свечение задаётся каналами без запятых — так работает rgb(var(--x) / .5).
+     Цвет — вторичный акцент (clay, #d39c87): тёплое свечение на тёмно-зелёных карточках. */
+  --bento-glow: 211 156 135;
 }
 
 .magic-bento-grid {
@@ -224,10 +241,10 @@
   min-height: 186px;
   padding: 1.25rem;
   overflow: hidden;
-  border: 1px solid rgb(235 179 190 / 0.16);
+  border: 1px solid rgb(211 156 135 / 0.18);
   border-radius: 1.25rem;
-  background: linear-gradient(150deg, #36252f 0%, #241a20 100%);
-  color: #fdf7f8;
+  background: linear-gradient(150deg, #162925 0%, #101a17 100%);
+  color: #f7ddd0;
   transform: perspective(1000px) rotateX(calc(var(--tilt-y, 0) * 1deg))
     rotateY(calc(var(--tilt-x, 0) * 1deg))
     translate3d(calc(var(--mag-x, 0) * 1px), calc(var(--mag-y, 0) * 1px), 0);
@@ -239,8 +256,8 @@
 }
 
 .magic-bento-card:hover {
-  border-color: rgb(235 179 190 / 0.3);
-  box-shadow: 0 10px 40px rgb(46 24 32 / 0.35), 0 0 30px rgb(var(--bento-glow) / 0.18);
+  border-color: rgb(211 156 135 / 0.35);
+  box-shadow: 0 10px 40px rgb(8 14 12 / 0.45), 0 0 30px rgb(var(--bento-glow) / 0.2);
 }
 
 /* Рамка со свечением: градиент маскируется так, что остаётся только кант. */
@@ -278,14 +295,14 @@
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ebb3be;
+  color: #e6c0ac;
 }
 
 .magic-bento-card__meta {
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  color: #fdf7f8;
+  color: #f7ddd0;
 }
 
 .magic-bento-card__title {
@@ -299,7 +316,7 @@
   margin: 0.5rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.5;
-  color: rgb(250 233 236 / 0.72);
+  color: rgb(247 221 208 / 0.78);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   /* На мобильном карточка одна в строке и места хватает — даём лишнюю строку,
@@ -358,7 +375,7 @@
   margin-top: auto;
   padding-top: 0.75rem;
   font-size: 0.75rem;
-  color: rgb(250 233 236 / 0.5);
+  color: rgb(247 221 208 / 0.55);
 }
 
 /* --- глобальный спотлайт --- */

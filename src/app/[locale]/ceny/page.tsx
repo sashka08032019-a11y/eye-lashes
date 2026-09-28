@@ -51,7 +51,7 @@ export default async function PricesPage({ params }: PageProps) {
                 {categoryTitles[category][locale]}
               </caption>
               <thead>
-                <tr className="border-b border-blush-200 text-left text-xs uppercase tracking-wide text-muted">
+                <tr className="border-b border-brand-200 text-left text-xs uppercase tracking-wide text-muted">
                   <th scope="col" className="py-2 pr-4 font-medium">
                     {dict.common.service}
                   </th>
@@ -70,7 +70,7 @@ export default async function PricesPage({ params }: PageProps) {
               </thead>
               <tbody>
                 {items.map((service) => (
-                  <tr key={service.slug} className="border-b border-blush-100">
+                  <tr key={service.slug} className="border-b border-brand-100">
                     <th scope="row" className="py-3 pr-4 text-left font-normal text-ink">
                       {/*
                         Ссылка растянута на всю ячейку (w-full) и вместе с py-3
@@ -80,7 +80,7 @@ export default async function PricesPage({ params }: PageProps) {
                       */}
                       <Link
                         href={localizedPath(locale, servicePath(service.slug))}
-                        className="-my-3 inline-block w-full py-3 transition-colors hover:text-blush-700"
+                        className="-my-3 inline-block w-full py-3 transition-colors hover:text-brand-700"
                       >
                         {service.name[locale]}
                       </Link>
@@ -88,7 +88,7 @@ export default async function PricesPage({ params }: PageProps) {
                     <td className="hidden py-3 pr-4 text-muted sm:table-cell">
                       {service.duration[locale]}
                     </td>
-                    <td className="py-3 text-right font-medium text-blush-700">
+                    <td className="py-3 text-right font-medium text-brand-700">
                       {service.price.toLocaleString("ru-RU")} {dict.common.currency}
                     </td>
                   </tr>
