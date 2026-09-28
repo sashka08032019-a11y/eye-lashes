@@ -55,7 +55,7 @@ scripts/generate-og.mjs  генерация og-cover и иконок (npm run og
   (город Есик, Алматинская область).
 - Canonical + Open Graph + Twitter Card через Next.js Metadata API,
   сборка — в `src/lib/seo.ts`. Теги кладутся в первоначальный HTML (SSR),
-  включая `og:image`/`twitter:image` → `public/og-cover.png` (1200×630).
+  включая `og:image`/`twitter:image` → `public/og-preview.png` (1200×630).
   Абсолютные адреса строятся от `NEXT_PUBLIC_SITE_URL` (`site.url`).
 - JSON-LD: `BeautySalon` (в корневом layout), `BreadcrumbList`, `Service`,
   `BlogPosting` — `src/lib/jsonld.ts`.
@@ -214,7 +214,8 @@ three.js и rapier.
 
 В `public/` лежат сгенерированные ассеты:
 
-- `og-cover.png` — картинка предпросмотра ссылки 1200×630, ~60 КБ;
+- `og-preview.png` — картинка предпросмотра ссылки 1200×630, ~100 КБ;
+  на неё наложён логотип из `Logo.png`;
 - `apple-touch-icon.png` — 180×180;
 - `favicon-32.png` — 32×32.
 
@@ -227,8 +228,12 @@ three.js и rapier.
 доступен по публичному HTTPS-URL и **весит меньше ~300 КБ**, а размеры в теге
 совпадают с реальной картинкой. Раньше в `og:image` подставлялся `Logo.png`
 (345 КБ, 3508×2480 при заявленных 1200×630) — поэтому карточка не появлялась.
-После правок `og:image` указывает на `og-cover.png`, а теги отдаются прямо
-в первоначальном HTML (SSR), а не появляются после выполнения JS.
+После правок `og:image` указывает на `og-preview.png` (логотип на светлом фоне),
+а теги отдаются прямо в первоначальном HTML (SSR), а не после выполнения JS.
+
+Файл назван `og-preview.png` (а не `og-cover.png`) намеренно: WhatsApp и
+Facebook кэшируют превью по URL картинки, поэтому новое имя заставляет бота
+забрать актуальную версию. Если меняете картинку — меняйте и имя файла.
 
 `Logo.png` и `favicon.ico` — исходные тяжёлые файлы (3508×2480); их можно
 удалить после замены логотипа. `favicon.ico` оставлен для старых браузеров,

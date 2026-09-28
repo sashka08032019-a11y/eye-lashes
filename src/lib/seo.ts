@@ -10,11 +10,11 @@ import { site } from "./site";
  * Пересобирается скриптом `node scripts/generate-og.mjs`.
  */
 const ogImage = {
-  url: "/og-cover.png",
+  url: "/og-preview.png",
   width: 1200,
   height: 630,
   type: "image/png",
-  alt: `${site.name} — наращивание ресниц в Есике`,
+  alt: `${site.name} — салон красоты в Есике`,
 };
 
 export type SeoInput = {

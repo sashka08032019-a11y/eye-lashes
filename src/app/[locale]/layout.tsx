@@ -53,11 +53,11 @@ export const metadata: Metadata = {
     siteName: site.name,
     images: [
       {
-        url: "/og-cover.png",
+        url: "/og-preview.png",
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: `${site.name} — наращивание ресниц в Есике`,
+        alt: `${site.name} — салон красоты в Есике`,
       },
     ],
   },
