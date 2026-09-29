@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaButtons from "@/components/CtaButtons";
 import Section from "@/components/Section";
+import TwogisMapLazy from "@/components/TwogisMapLazy";
 import { getDictionary } from "@/content/dictionary";
 import { isLocale, localizedPath } from "@/lib/i18n";
 import { routes } from "@/lib/routes";
@@ -30,9 +31,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 /**
  * Карта с одним виджетом 2ГИС — других картографических сервисов на сайте нет.
- * Виджет грузится лениво и не мешает основному контенту страницы — адрес и
- * часы работы присутствуют в HTML обычным текстом, поэтому индексируются
- * даже без загрузки iframe.
+ * Виджет подключается динамически, только в браузере (см. TwogisMapLazy),
+ * и не мешает основному контенту страницы — адрес и часы работы присутствуют
+ * в HTML обычным текстом, поэтому индексируются даже без загрузки iframe.
  */
 export default async function MapPage({ params }: PageProps) {
   const { locale } = await params;
@@ -85,16 +86,11 @@ export default async function MapPage({ params }: PageProps) {
       </Section>
 
       <Section>
-        <div className="overflow-hidden rounded-2xl border border-brand-100">
-          <iframe
-            src={mapEmbeds.twogis}
-            title={`${site.name} — ${dict.nav.map} (2ГИС)`}
-            width="100%"
-            height="480"
-            loading="lazy"
-            className="block border-0"
-          />
-        </div>
+        <TwogisMapLazy
+          src={mapEmbeds.twogis}
+          title={`${site.name} — ${dict.nav.map} (2ГИС)`}
+          loadingLabel={page.loadingLabel}
+        />
 
         <div className="mt-8">
           <CtaButtons locale={locale} dict={dict} />
