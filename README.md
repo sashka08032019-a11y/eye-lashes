@@ -24,7 +24,7 @@ src/
       ceny/              прайс-таблица
       portfolio/         портфолио (плейсхолдеры)
       blog/              блог; blog/[slug] — статья
-      karta/             виджет 2ГИС с меткой салона
+      karta/             карта (виджет Яндекс Карт) с меткой салона
       kontakty/          NAP-блок и мессенджеры
     api/reviews/         GET опубликованные, POST приём отзыва
     robots.ts            robots.txt
@@ -204,7 +204,7 @@ three.js и rapier.
 | Координаты                      | `site.geo`                                         | 43.34888, 77.470706 — для геометки и JSON-LD                |
 | Часы работы                     | `site.openingHours`                                | заглушка                                                    |
 | Коды верификации                | `site.verification`                                | Яндекс.Вебмастер и Google Search Console                    |
-| Ссылки и виджет карты           | `mapLinks`, `mapEmbeds`                            | только 2ГИС (другие картографические сервисы убраны)        |
+| Ссылки и карта                  | `mapLinks`, `mapEmbeds`                            | карта — виджет Яндекс Карт (`mapEmbeds.yandex`, без API-ключа); ссылки ведут в карточку 2ГИС |
 | Прайс                           | `src/content/services.ts`                          | стандартный набор, подтвердить у заказчика                  |
 | Статьи блога                    | `src/content/posts.ts`                             | черновики, помечены `draft: true` → `noindex` и вне sitemap |
 | Фото портфолио                  | `public/portfolio/`                                | сейчас плейсхолдеры в `src/app/[locale]/portfolio/page.tsx` |
